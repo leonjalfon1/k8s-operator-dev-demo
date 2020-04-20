@@ -520,4 +520,39 @@ kubectl get pods
 operator-sdk build leonjalfon1/memcached-operator:v0.0.1
 ```
 
-2. 
+2. Set the image in the "./deploy/operator.yaml" file
+
+```
+# Linux
+sed -i 's|REPLACE_IMAGE|leonjalfon1/memcached-operator:v0.0.1|g' deploy/operator.yaml
+
+# Mac
+sed -i "" 's|REPLACE_IMAGE|leonjalfon1/memcached-operator:v0.0.1|g' deploy/operator.yaml
+```
+
+3. Push the operator image
+
+```
+docker push leonjalfon1/memcached-operator:v0.0.1
+```
+
+4. Setup RBAC and deploy the memcached-operator:
+
+```
+kubectl create -f deploy/service_account.yaml
+kubectl create -f deploy/role.yaml
+kubectl create -f deploy/role_binding.yaml
+kubectl create -f deploy/operator.yaml
+```
+
+5. Verify that the memcached-operator pod is up and running:
+
+```
+kubectl get pods
+```
+
+6. Verify that the operator is running successfully by checking its logs.
+
+```
+kubectl logs memcached-operator-5b8888b455-sdxwg
+```
