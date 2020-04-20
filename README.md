@@ -140,3 +140,15 @@ status:
 ## Add a new Controller
 ---
 
+1. Add a new Controller to the project that will watch and reconcile the Memcached resource by run
+
+```
+operator-sdk add controller --api-version=cache.example.com/v1alpha1 --kind=Memcached
+```
+
+2. This will scaffold a new Controller implementation under pkg/controller/memcached/...
+
+
+## Configure Controller Logic
+---
+
